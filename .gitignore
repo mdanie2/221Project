@@ -1,13 +1,16 @@
 # Project Specific
-data/unzipped_data/
-Dataset_for_Detection_of_Cyber-Trolls.json
-Dataset\ for\ Detection\ of\ Cyber-Trolls.json
-political_social_media.csv
-charlottesville-on-twitter/
-russian-troll-tweets/
-democratvsrepublicantweets/
-election-day-tweets/
-twitter_samples/
+#data/unzipped_data/
+#Dataset_for_Detection_of_Cyber-Trolls.json
+#Dataset\ for\ Detection\ of\ Cyber-Trolls.json
+#political_social_media.csv
+#charlottesville-on-twitter/
+#russian-troll-tweets/
+#democratvsrepublicantweets/
+#election-day-tweets/
+#twitter_samples/
+
+# general
+*.sqlite
 
 # General macOS
 .DS_Store

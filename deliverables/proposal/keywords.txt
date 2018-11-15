@@ -1,0 +1,5 @@
+naive bayes
+stochastic gradient descent
+trolls
+twitter
+political bias

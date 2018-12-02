@@ -1,7 +1,6 @@
 import sys
 import csv
 import string
-'''TODO: IMPROVE'''
 
 #path = path to csv file
 #splitter = way to split desired csv file. default is ","

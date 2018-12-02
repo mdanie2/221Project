@@ -24,10 +24,13 @@ def extractTraining(path, mode, score, tweetLoc):
         trainF = open("./data/train-test-sets/troll.train", mode)
         devF = open("./data/train-test-sets/troll.dev", mode)
 
+        regex = re.compile(r"&\S+") #to remove special HTML characters (&amp; &lquo; etc.)
+
         for line in reader:
             tweet = line[tweetLoc]
             tweet = tweet.lower()
-            tweet = " ".join(tweet.split())
+            tweet = regex.sub("", tweet) # remove special HTML characters (&amp; &lquo; etc.)
+            tweet = " ".join(tweet.split()) # eliminate white space
             tweet = tweet.translate(None, string.punctuation)
 
             # eliminates most emojis

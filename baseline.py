@@ -63,27 +63,5 @@ def baselinePrediction(path, weights, tweetLoc, wType):
                         newF.write("no_class  "+tweet+"\n")
 
 
-    # newF = open(firstHalf+"/baseline_score.csv", 'w+')
-    
-    # attributes = f.readline()
-
-    # for line in f.readlines():
-    #     lowercase = line.strip().lower()
-    #     noPunc = lowercase.translate(None, string.punctuation)
-    #     noPuncOrDigits = noPunc.translate(None, string.digits)
-    #     score = 0
-    #     for word in noPuncOrDigits.split():
-    #         score += weights.get(word, 0)
-    #     if score > 0:
-    #         newF.write("+1\t"+line)
-    #     elif score < 0:
-    #         newF.write("-1\t"+line)
-    #     else:
-    #         newF.write("no_class\t"+line)
-
-    # f.close()
-    # newF.close()
-
-
 if __name__ == "__main__":
   main()

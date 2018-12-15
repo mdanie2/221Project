@@ -10,8 +10,23 @@ def main():
     trainExamples = getExamples("train")
     testExamples = getExamples("test")
     # w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, eta)
-    print "========= NGRAM OF 4 ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(4), 100, 0.1)
+    print "========= WORDS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= 2GRAMS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= 3GRAMS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= 4GRAMS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= 5GRAMS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= 6GRAMS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= 7GRAMS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= 8GRAMS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+
 
 
 def getExamples(exType):
@@ -93,9 +108,10 @@ def learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta)
 
                 increment(weights, -1*eta, mygradient)
             if t % 5 == 0:
-                trainError = evaluatePredictor(trainExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
-                testError = evaluatePredictor(testExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
-                print 'train accuracy: {}, test accuracy: {}'.format(1-trainError, 1-testError)
+                trainError, trainTrollError, trainPolError = evaluatePredictor(trainExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
+                testError, testTrollError, testPolError = evaluatePredictor(testExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
+                print 'train accuracy: {}, troll train accuracy: {}, politician train accuracy: {}'.format(1-trainError, 1-trainTrollError, 1-trainPolError)
+                print 'test accuracy: {}, troll test accuracy: {}, politician train accuracy: {}'.format(1-testError, 1-testTrollError, 1-testPolError)
     
     stochasticGradientDescent(loss, gradient, len(trainExamples))
     # END_YOUR_CODE

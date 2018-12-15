@@ -41,9 +41,12 @@ def evaluatePredictor(examples, predictor):
     of misclassiied examples.
     '''
     error = 0
+    trollError, trollCount = 0, 0
+    polError, polCount = 0, 0
     for x, y in examples:
         if predictor(x) != y:
             error += 1
+        print type(y)
     return 1.0 * error / len(examples)
 
 def outputWeights(weights, path):

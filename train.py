@@ -9,7 +9,9 @@ from util import *
 def main():
     trainExamples = getExamples("train")
     testExamples = getExamples("test")
-    w = learnPredictor(trainExamples, testExamples, 20, 0.01)
+    # w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, eta)
+    print "========= NGRAM OF 4 ========"
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(4), 100, 0.1)
 
 
 def getExamples(exType):
@@ -24,7 +26,7 @@ def getExamples(exType):
     with open(path, "r") as f:
         for line in f.readlines():
             line = line.split()
-            score, line = line[0], " ".join(line[1:])
+            score, line = float(line[0]), " ".join(line[1:])
             exList.append((line, score))
 
     return exList
@@ -40,12 +42,12 @@ def extractWordFeatures(x):
     # BEGIN_YOUR_CODE (our solution is 4 lines of code, but don't worry if you deviate from this)
     mydict = collections.defaultdict(float)
     for s in x.split(' '):
-        if s.isalnum() and s[0:4] != "http":
+        if s.isalnum():
             mydict[s] += 1
     return mydict
     # END_YOUR_CODE
 
-def learnPredictor(trainExamples, testExamples, numIters, eta):
+def learnPredictor(trainExamples, testExamples, featureExtractor, numIters, eta):
     '''
     Given |trainExamples| and |testExamples| (each one is a list of (x,y)
     pairs), a |featureExtractor| to apply to x, and the number of iterations to
@@ -62,10 +64,11 @@ def learnPredictor(trainExamples, testExamples, numIters, eta):
     # BEGIN_YOUR_CODE (our solution is 12 lines of code, but don't worry if you deviate from this)
     features = {}
     for x,y in trainExamples:
-        features.update(extractWordFeatures(x))
+        features.update(featureExtractor(x))
     weights.update(dict.fromkeys(features,0.0))
 
     def loss(w, f, realY):
+        # print dotProduct(w,f)
         score = 1 if dotProduct(w,f) >= 0 else -1
         margin = score * realY
         return 0 if margin >= 0 else 2
@@ -80,24 +83,39 @@ def learnPredictor(trainExamples, testExamples, numIters, eta):
 
     def stochasticGradientDescent(loss, gradient, n):
         # n = number of points
-        for t in range(numIters):
+        for t in range(1, numIters+1):
             for i in range(n):
                 train, realY = trainExamples[i][0], trainExamples[i][1]
 
                 f = featureExtractor(train)
-
                 myloss = loss(weights, f, realY)
                 mygradient = gradient(myloss, train, realY, f)
 
                 increment(weights, -1*eta, mygradient)
-
-            trainError = evaluatePredictor(trainExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
-            testError = evaluatePredictor(testExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
-            print 'trainError: {}, testError: {}'.format(trainError, testError)
+            if t % 5 == 0:
+                trainError = evaluatePredictor(trainExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
+                testError = evaluatePredictor(testExamples, lambda x : (1 if dotProduct(featureExtractor(x), weights) >= 0 else -1))
+                print 'train accuracy: {}, test accuracy: {}'.format(1-trainError, 1-testError)
     
     stochasticGradientDescent(loss, gradient, len(trainExamples))
     # END_YOUR_CODE
     return weights
+
+def extractCharacterFeatures(n):
+    '''
+    Return a function that takes a string |x| and returns a sparse feature
+    vector consisting of all n-grams of |x| without spaces.
+    EXAMPLE: (n = 3) "I like tacos" --> {'Ili': 1, 'lik': 1, 'ike': 1, ...
+    You may assume that n >= 1.
+    '''
+    def extract(x):
+        # BEGIN_YOUR_CODE (our solution is 6 lines of code, but don't worry if you deviate from this)
+        translated, ngrams = ''.join(filter(lambda y: y != '', x.split(' '))), ''
+        for i in xrange(len(translated)-n+1):
+            ngrams = ngrams + ' ' + translated[i:i+n] 
+        return extractWordFeatures(ngrams)
+        # END_YOUR_CODE
+    return extract
 
 if __name__ == "__main__":
     main()

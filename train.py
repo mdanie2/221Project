@@ -11,21 +11,22 @@ def main():
     testExamples = getExamples("test")
     # w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, eta)
     print "========= WORDS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    print "========= WORDS ========"
+    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 200, 0.01)
     print "========= 2GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(2), 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(2), 200, 0.01)
     print "========= 3GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(3), 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(3), 200, 0.01)
     print "========= 4GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(4), 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(4), 200, 0.01)
     print "========= 5GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(5), 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(5), 200, 0.01)
     print "========= 6GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(6), 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(6), 200, 0.01)
     print "========= 7GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(7), 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(7), 200, 0.01)
     print "========= 8GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(8), 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(8), 200, 0.01)
 
 
 

@@ -13,19 +13,19 @@ def main():
     print "========= WORDS ========"
     w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
     print "========= 2GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(2), 100, 0.1)
     print "========= 3GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(3), 100, 0.1)
     print "========= 4GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(4), 100, 0.1)
     print "========= 5GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(5), 100, 0.1)
     print "========= 6GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(6), 100, 0.1)
     print "========= 7GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(7), 100, 0.1)
     print "========= 8GRAMS ========"
-    w = learnPredictor(trainExamples, testExamples, extractWordFeatures, 100, 0.1)
+    w = learnPredictor(trainExamples, testExamples, extractCharacterFeatures(8), 100, 0.1)
 
 
 

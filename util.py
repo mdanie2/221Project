@@ -56,7 +56,7 @@ def evaluatePredictor(examples, predictor):
                 error += 1
                 polError += 1
             # if predictor(x) != y:
-    return 1.0 * error / len(examples), 1.0 * trollError / trollCount, 1.0 * pol / polCount
+    return 1.0 * error / len(examples), 1.0 * trollError / trollCount, 1.0 * polError / polCount
 
 def outputWeights(weights, path):
     print "%d weights" % len(weights)
